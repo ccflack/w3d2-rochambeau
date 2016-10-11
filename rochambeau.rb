@@ -62,7 +62,6 @@ class Game
       puts "Player: #{self.player_one_choice} vs Computer: #{self.computer} ----- #{winner.upcase} WINS"
   end
 
-
   def draw
     puts "I picked #{self.computer}, too! It's a draw. Go again!"
     play
