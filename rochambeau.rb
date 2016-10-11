@@ -20,6 +20,8 @@ class Game
     self.computer = selection.upcase
     match = [player_one_choice, computer]
     results(match)
+    puts "Would you like to play again?"
+    
   end
 
   def selection
