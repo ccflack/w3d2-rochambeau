@@ -21,7 +21,12 @@ class Game
     match = [player_one_choice, computer]
     results(match)
     puts "Would you like to play again?"
-    
+    response = gets.chomp
+    if response == "y#{*}"
+      play
+    else
+      exit
+    end
   end
 
   def selection
