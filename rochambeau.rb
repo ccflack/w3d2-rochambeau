@@ -1,6 +1,18 @@
 
 class Game
-  attr_accessor :player_one_choice, :computer
+  attr_accessor :player_one_choice,
+                :computer,
+                :rock_wins,
+                :paper_wins,
+                :scissors_wins,
+                :draw_count
+
+  def initialize
+    self.rock_wins = 0
+    self.paper_wins = 0
+    self.scissors_wins = 0
+    self.draw_count = 0
+  end
 
   def play
     puts "Let's play a game! Choose \"rock\", \"paper\", or \"scissors\"."
@@ -24,6 +36,7 @@ class Game
       decision("computer")
     else
       draw
+      self.draw_count += 1
     end
   end
 
@@ -33,7 +46,8 @@ class Game
 
 
   def draw
-    puts "It's a draw. Go again!"
+    puts "I picked #{self.computer}, too! It's a draw. Go again!"
+    play
   end
 
 end
