@@ -20,13 +20,7 @@ class Game
     self.computer = selection.upcase
     match = [player_one_choice, computer]
     results(match)
-    puts "Would you like to play again?"
-    response = gets.chomp
-    if response == "y#{*}"
-      play
-    else
-      exit
-    end
+    replay
   end
 
   def selection
@@ -37,13 +31,30 @@ class Game
     results = {}
     results[:winning] = ["ROCK", "SCISSORS"], ["PAPER", "ROCK"], ["SCISSORS", "PAPER"]
     results[:losing] = ["SCISSORS", "ROCK"], ["ROCK", "PAPER"], ["PAPER", "SCISSORS"]
+    results[:draw] = ["ROCK", "ROCK"], ["PAPER", "PAPER"], ["SCISSORS", "SCISSORS"]
     if results[:winning].include?(match)
       decision("player")
+      if match[0] == "ROCK"
+        self.rock_wins =+ 1
+      elsif match[0] == "PAPER"
+        self.paper_wins =+ 1
+      elsif match[0] =="SCISSORS"
+        self.scissors_wins =+ 1
+      end
     elsif results[:losing].include?(match)
       decision("computer")
-    else
+      if match[1] == "ROCK"
+        self.rock_wins =+ 1
+      elsif match[1] == "PAPER"
+        self.paper_wins =+ 1
+      elsif match[1] =="SCISSORS"
+        self.scissors_wins =+ 1
+      end
+    elsif results[:draw].include?(match)
       draw
       self.draw_count += 1
+    else
+      puts "You can't use that here."
     end
   end
 
@@ -55,6 +66,21 @@ class Game
   def draw
     puts "I picked #{self.computer}, too! It's a draw. Go again!"
     play
+  end
+
+  def score
+    "Rock won #{self.rock_wins} times. \nPaper won #{self.paper_wins} times. \nScissors won #{self.scissors_wins} times. \nThere were #{self.draw_count} draws."
+  end
+
+  def replay
+    puts "Would you like to play again?"
+    response = gets.chomp
+    if response == "y"
+      play
+    else
+      puts score
+      exit
+    end
   end
 
 end
